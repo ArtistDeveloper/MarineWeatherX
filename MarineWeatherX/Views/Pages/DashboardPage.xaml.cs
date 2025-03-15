@@ -20,11 +20,11 @@ namespace MarineWeatherX.Views.Pages
 
         private void ViewModel_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            switch(e.PropertyName)
+            switch (e.PropertyName)
             {
-                // ViewModel의 Property의 이름이 Text일 때
-                case "Counter":
-                    this.btnClickMe.Background = new SolidColorBrush(Colors.White);
+                case "AdministrativeAgency":
+                    this.loadingGrid.Visibility = Visibility.Collapsed;
+                    this.dashboardGrid.Visibility = Visibility.Visible;
                     break;
             }
         }

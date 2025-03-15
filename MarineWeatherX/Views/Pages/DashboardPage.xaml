@@ -6,44 +6,359 @@
     xmlns:local="clr-namespace:MarineWeatherX.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:controls="clr-namespace:MarineWeatherX.Controls"
     Title="DashboardPage"
     d:DataContext="{d:DesignInstance local:DashboardPage,
                                      IsDesignTimeCreatable=False}"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
+    d:DesignHeight="800"
+    d:DesignWidth="850"
     ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
 
-    <Grid VerticalAlignment="Top">
+    <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <ui:Button
-            Grid.Column="0"
-            x:Name="btnClickMe"
-            Command="{Binding ViewModel.CounterIncrementCommand, Mode=OneWay}"
-            Content="Click me!"
-            Icon="Fluent24" />
-        <TextBlock
-            Grid.Column="1"
-            Margin="12,0,0,0"
-            VerticalAlignment="Center"
-            Text="{Binding ViewModel.Counter, Mode=OneWay}"/>
-        <ui:Button
-            Grid.Column="2"
-            Command="{Binding ViewModel.TextChangeCommand, Mode=OneWay}"
-            Content="Click me!"
-            Icon="Fluent24" />
-        <TextBlock
-            Grid.Column="3"
-            Margin="12,0,0,0"
-            VerticalAlignment="Center"
-            Text="{Binding ViewModel.CurrentTime, Mode=OneWay}"/>
+        <Grid Grid.Column="0" x:Name="loadingGrid" Visibility="Visible">
+            <controls:LoadingControl />
+        </Grid>
+        <!-- Loading -->
+
+        <Grid Grid.Column="0" x:Name="dashboardGrid" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <ui:Card Background="DarkSlateGray" Margin="0,0,0,15">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                        <ui:SymbolIcon Symbol="Info28" FontSize="18" FontWeight="Bold" Margin="0,0,5,0"/>
+                        <ui:TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15" FontWeight="Bold" Text="Welecome To Gangnamgu-Popultaion Analysis Lab !"></ui:TextBlock>
+                    </StackPanel>
+                </ui:Card>
+            </Grid>
+            <!-- INFO -->
+
+            <Grid Grid.Row="1" Margin="0,0,0,0">
+                <StackPanel>
+                    <TextBlock Text="● Rank Summary" FontSize="15" FontWeight="SemiBold" Margin="0,0,0,15"></TextBlock>
+                </StackPanel>
+            </Grid>
+            <!-- RANK SUMMARY -->
+
+            <Grid Grid.Row="2" Margin="0,0,0,15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0" Margin="0,0,15,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <ui:Card>
+                            <StackPanel>
+                                <TextBlock Text="Top3 Total Population" Foreground="White" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,10"/>
+
+                                <ui:Card Margin="0,0,0,10">
+                                    <ui:TextBlock Margin="0,0,0,0">
+                                        <Run Text="신사동" />
+                                        <Run Text="31,250" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
+                                    </ui:TextBlock>
+                                </ui:Card>
+                                <ui:Card Margin="0,0,0,10">
+                                    <ui:TextBlock Margin="0,0,0,0">
+                                        <Run Text="청담동" />
+                                        <Run Text="29,280" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
+                                    </ui:TextBlock>
+                                </ui:Card>
+                                <ui:Card>
+                                    <ui:TextBlock Margin="0,0,0,0">
+                                        <Run Text="논현동" />
+                                        <Run Text="28,775" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
+                                    </ui:TextBlock>
+                                </ui:Card>
+                            </StackPanel>
+                        </ui:Card>
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Column="1" Margin="0,0,15,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <ui:Card>
+                            <StackPanel>
+                                <TextBlock Text="Top3 Male Population" Foreground="White" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,10"/>
+                                <ui:Card Margin="0,0,0,10">
+                                    <ui:TextBlock Margin="0,0,0,0">
+                                        <Run Text="삼성동" />
+                                        <Run Text="10,235" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
+                                    </ui:TextBlock>
+                                </ui:Card>
+                                <ui:Card Margin="0,0,0,10">
+                                    <ui:TextBlock Margin="0,0,0,0">
+                                        <Run Text="개포동" />
+                                        <Run Text="9,580" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
+                                    </ui:TextBlock>
+                                </ui:Card>
+                                <ui:Card>
+                                    <ui:TextBlock Margin="0,0,0,0">
+                                        <Run Text="도곡동" />
+                                        <Run Text="8,775" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
+                                    </ui:TextBlock>
+                                </ui:Card>
+                            </StackPanel>
+                        </ui:Card>
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Column="2" Margin="0,0,15,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <ui:Card>
+                            <StackPanel>
+                                <TextBlock Text="Top3 FeMale Population" Foreground="White" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,10"/>
+                                <ui:Card Margin="0,0,0,10">
+                                    <ui:TextBlock Margin="0,0,0,0">
+                                        <Run Text="논현동" />
+                                        <Run Text="12,655" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
+                                    </ui:TextBlock>
+                                </ui:Card>
+                                <ui:Card Margin="0,0,0,10">
+                                    <ui:TextBlock Margin="0,0,0,0">
+                                        <Run Text="청담동" />
+                                        <Run Text="10,450" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
+                                    </ui:TextBlock>
+                                </ui:Card>
+                                <ui:Card>
+                                    <ui:TextBlock Margin="0,0,0,0">
+                                        <Run Text="삼성동" />
+                                        <Run Text="9,785" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
+                                    </ui:TextBlock>
+                                </ui:Card>
+                            </StackPanel>
+                        </ui:Card>
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Column="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <ui:Card Margin="0,0,15,0">
+                        <StackPanel>
+                            <TextBlock Text="User Rating History" Foreground="White" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,15"/>
+                            <ui:Card Margin="0,0,0,10">
+                                <StackPanel Orientation="Horizontal">
+                                    <ui:TextBlock Text="Kelvin Lee" Margin="0,0,20,0"/>
+                                    <ui:RatingControl></ui:RatingControl>
+                                </StackPanel>
+                            </ui:Card>
+
+                            <ui:Card Margin="0,0,0,10">
+                                <StackPanel Orientation="Horizontal">
+                                    <ui:TextBlock Text="Alex Kim" Margin="0,0,20,0"/>
+                                    <ui:RatingControl></ui:RatingControl>
+                                </StackPanel>
+                            </ui:Card>
+
+                            <ui:Card Margin="0,0,0,10">
+                                <StackPanel Orientation="Horizontal">
+                                    <ui:TextBlock Text="Jhon Park" Margin="0,0,20,0"/>
+                                    <ui:RatingControl></ui:RatingControl>
+                                </StackPanel>
+                            </ui:Card>
+                        </StackPanel>
+                    </ui:Card>
+                </Grid>
+            </Grid>
+            <!-- SUMMARY DATAS -->
+
+            <Grid Grid.Row="3" Margin="0,0,0,15">
+                <StackPanel>
+                    <TextBlock Text="● Search Details" FontSize="15" FontWeight="SemiBold" Margin="0,0,0,15"></TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <ComboBox Width ="235" Text="{Binding ViewModel.SelectedAdministrativeAgency}" ItemsSource="{Binding ViewModel.AdministrativeAgency}" Margin="0,0,15,0"></ComboBox>
+                        <ui:Button Width="100" Command="{Binding ViewModel.SearchDeatilCommand}" Height="auto" Content="Search" Foreground="WhiteSmoke" FontWeight="SemiBold" FontSize="15" Background="DarkSlateGray"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+            <!-- SEARCH DETAIL / CBX & SEARCH BTN-->
+
+            <Grid Grid.Row="4" Margin="0,0,0,15">
+                <!-- SEARCH DETAIL -->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0" Margin="0,0,15,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="150"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <ui:Card>
+                            <StackPanel>
+                                <TextBlock Text="Total Population" Foreground="White" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,10"/>
+                                <ui:Card Margin="0,0,0,10">
+                                    <ui:TextBlock Margin="0,0,0,0">
+                                        <Run Text="{Binding ViewModel.SelectedTotalPopulation}" FontSize="30" FontWeight="Bold" Foreground="CadetBlue"/>
+                                    </ui:TextBlock>
+                                </ui:Card>
+                            </StackPanel>
+                        </ui:Card>
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Column="1" Margin="0,0,15,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <ui:Card>
+                            <StackPanel>
+                                <TextBlock Text="Male Population" Foreground="White" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,10"/>
+                                <ui:Card Margin="0,0,0,10">
+                                    <ui:TextBlock Margin="0,0,0,0">
+                                        <Run Text="{Binding ViewModel.SelectedMalePopulation}" FontSize="30" FontWeight="Bold" Foreground="CadetBlue"/>
+                                    </ui:TextBlock>
+                                </ui:Card>
+                            </StackPanel>
+                        </ui:Card>
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Column="2" Margin="0,0,15,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <ui:Card>
+                            <StackPanel>
+                                <TextBlock Text="Female Population" Foreground="White" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,10"/>
+                                <ui:Card Margin="0,0,0,10">
+                                    <ui:TextBlock Margin="0,0,0,0">
+                                        <Run Text="{Binding ViewModel.SelectedFeMalePopulation}" FontSize="30" FontWeight="Bold" Foreground="CadetBlue"/>
+                                    </ui:TextBlock>
+                                </ui:Card>
+                            </StackPanel>
+                        </ui:Card>
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Column="3" Margin="0,0,15,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <ui:Card>
+                            <StackPanel>
+                                <TextBlock Text="Sex Ratio" Foreground="White" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,10"/>
+                                <ui:Card Margin="0,0,0,10">
+                                    <ui:TextBlock Margin="0,0,0,0">
+                                        <Run Text="{Binding ViewModel.SelectedSexRatio}" FontSize="30" FontWeight="Bold" Foreground="CadetBlue"/>
+                                    </ui:TextBlock>
+                                </ui:Card>
+                            </StackPanel>
+                        </ui:Card>
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Column="4" Margin="0,0,15,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <ui:Card>
+                            <StackPanel>
+                                <TextBlock Text="Number of household" Foreground="White" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,10"/>
+                                <ui:Card Margin="0,0,0,10">
+                                    <ui:TextBlock Margin="0,0,0,0">
+                                        <Run Text="{Binding ViewModel.SelectedNumberOfHouseholds}" FontSize="30" FontWeight="Bold" Foreground="CadetBlue"/>
+                                    </ui:TextBlock>
+                                </ui:Card>
+                            </StackPanel>
+                        </ui:Card>
+                    </Grid>
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Row="5" Margin="0,20,0,0">
+                <StackPanel>
+                    <TextBlock Text="● Your Courses" FontSize="15" FontWeight="SemiBold" Margin="0,0,0,15"></TextBlock>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Row="6" Margin="0,0,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0" Margin="0,0,15,0">
+                    <ui:Card>
+                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                <ui:SymbolIcon Symbol="Link28" FontSize="18" FontWeight="Bold" Margin="0,0,5,0"/>
+                                <ui:TextBlock Text="Do you want to learn about WPF basic ?" FontSize="15" FontWeight="SemiBold" Margin="0,0,0,0"/>
+                            </StackPanel>
+                            <ui:Button Width="300" Content="Click to Link!" FontSize="15" FontWeight="DemiBold" Foreground="Purple" HorizontalAlignment="Center" VerticalAlignment="Center" Background="MediumPurple" />
+                        </StackPanel>
+                    </ui:Card>
+                </Grid>
+                <Grid Grid.Column="1" Margin="0,0,15,0">
+                    <ui:Card>
+                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                <ui:SymbolIcon Symbol="Link28" FontSize="18" FontWeight="Bold" Margin="0,0,5,0"/>
+                                <ui:TextBlock Text="How about Blazor WebAssembly ?" FontSize="15" FontWeight="SemiBold" Margin="0,0,0,0"/>
+                            </StackPanel>
+                            <ui:Button Command="{Binding ViewModel.GoToBlazorWasmLinkCommand}" Width="300" Content="Click to Link!" FontSize="15" FontWeight="DemiBold" Foreground="Purple" HorizontalAlignment="Center" VerticalAlignment="Center" Background="MediumPurple" />
+                        </StackPanel>
+                    </ui:Card>
+                </Grid>
+                <Grid Grid.Column="2" Margin="0,0,15,0">
+                    <ui:Card>
+                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                <ui:SymbolIcon Symbol="Link28" FontSize="18" FontWeight="Bold" Margin="0,0,5,0"/>
+                                <ui:TextBlock Text="Blazor ASP.NET Core also here !" FontSize="15" FontWeight="SemiBold" Margin="0,0,0,0"/>
+                            </StackPanel>
+                            <ui:Button Width="300" Content="Click to Link!" FontSize="15" FontWeight="DemiBold" Foreground="Purple" HorizontalAlignment="Center" VerticalAlignment="Center" Background="MediumPurple" />
+                        </StackPanel>
+                    </ui:Card>
+                </Grid>
+            </Grid>
+        </Grid>
+        <!-- Dashboard -->
     </Grid>
 </Page>
