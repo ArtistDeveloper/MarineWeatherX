@@ -23,7 +23,7 @@ namespace MarineWeatherX.Views.Pages
             switch(e.PropertyName)
             {
                 // ViewModel의 Property의 이름이 Text일 때
-                case "Text":
+                case "Counter":
                     this.btnClickMe.Background = new SolidColorBrush(Colors.White);
                     break;
             }

@@ -12,6 +12,7 @@ using MarineWeatherX.Views.Windows;
 using Wpf.Ui;
 using Wpf.Ui.DependencyInjection;
 using MarineWeatherX.Interfaces;
+using MarineWeatherX.Models;
 
 namespace MarineWeatherX
 {
@@ -41,9 +42,7 @@ namespace MarineWeatherX
                 services.AddSingleton<ITaskBarService, TaskBarService>();
 
                 // Service containing navigation, same as INavigationWindow... but without window
-                services.AddSingleton<INavigationService, NavigationService>();
-
-                services.AddSingleton<IDateTime, DateTimeService>();
+                services.AddSingleton<INavigationService, NavigationService>();           
 
                 // Main window with navigation
                 services.AddSingleton<INavigationWindow, MainWindow>();
@@ -55,6 +54,10 @@ namespace MarineWeatherX
                 services.AddSingleton<DataViewModel>();
                 services.AddSingleton<SettingsPage>();
                 services.AddSingleton<SettingsViewModel>();
+
+                services.AddSingleton<IDateTime, DateTimeService>();
+                services.AddSingleton<IDatabase<GangnamguPopulation>, GangnamguPopulationService>();
+                services.AddDbContext<WpfProjectDatabaseContext>();
             }).Build();
 
         /// <summary>
