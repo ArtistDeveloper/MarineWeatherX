@@ -22,39 +22,30 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="0" x:Name="loadingGrid" Visibility="Visible">
+        <Grid Grid.Column="0" x:Name="loadingGrid" Visibility="Collapsed">
             <controls:LoadingControl />
         </Grid>
         <!-- Loading -->
 
-        <Grid Grid.Column="0" x:Name="dashboardGrid" Visibility="Collapsed">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
-
-            <Grid Grid.Row="0">
+        <StackPanel Grid.Column="0" x:Name="dashboardGrid" Visibility="Visible">
+            <!-- Welcome -->
+            <Grid>
                 <ui:Card Background="DarkSlateGray" Margin="0,0,0,15">
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
                         <ui:SymbolIcon Symbol="Info28" FontSize="18" FontWeight="Bold" Margin="0,0,5,0"/>
-                        <ui:TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15" FontWeight="Bold" Text="Welecome To Gangnamgu-Popultaion Analysis Lab !"></ui:TextBlock>
+                        <ui:TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15" FontWeight="Bold" Text="Welecome To MarineWeatherX !"></ui:TextBlock>
                     </StackPanel>
                 </ui:Card>
             </Grid>
-            <!-- INFO -->
 
+            <!--Rank Summary-->
             <Grid Grid.Row="1" Margin="0,0,0,0">
                 <StackPanel>
                     <TextBlock Text="● Rank Summary" FontSize="15" FontWeight="SemiBold" Margin="0,0,0,15"></TextBlock>
                 </StackPanel>
             </Grid>
-            <!-- RANK SUMMARY -->
 
+            <!-- Top3 Dasboard UI -->
             <Grid Grid.Row="2" Margin="0,0,0,15">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -192,8 +183,8 @@
                     </ui:Card>
                 </Grid>
             </Grid>
-            <!-- SUMMARY DATAS -->
 
+            <!--Search Details-->
             <Grid Grid.Row="3" Margin="0,0,0,15">
                 <StackPanel>
                     <TextBlock Text="● Search Details" FontSize="15" FontWeight="SemiBold" Margin="0,0,0,15"></TextBlock>
@@ -203,10 +194,9 @@
                     </StackPanel>
                 </StackPanel>
             </Grid>
-            <!-- SEARCH DETAIL / CBX & SEARCH BTN-->
 
+            <!-- Search Details - Polution -->
             <Grid Grid.Row="4" Margin="0,0,0,15">
-                <!-- SEARCH DETAIL -->
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
@@ -311,6 +301,7 @@
                 </Grid>
             </Grid>
 
+            <!-- Your course -->
             <Grid Grid.Row="5" Margin="0,20,0,0">
                 <StackPanel>
                     <TextBlock Text="● Your Courses" FontSize="15" FontWeight="SemiBold" Margin="0,0,0,15"></TextBlock>
@@ -358,7 +349,8 @@
                     </ui:Card>
                 </Grid>
             </Grid>
-        </Grid>
-        <!-- Dashboard -->
+
+
+        </StackPanel>
     </Grid>
 </Page>
