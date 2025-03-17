@@ -27,10 +27,10 @@
         </Grid>
         <!-- Loading -->
 
-        <StackPanel Grid.Column="0" x:Name="dashboardGrid" Visibility="Visible">
+        <StackPanel Grid.Column="0" x:Name="dashboardPanel" Visibility="Visible">
             <!-- Welcome -->
             <Grid>
-                <ui:Card Background="DarkSlateGray" Margin="0,0,0,15">
+                <ui:Card Background="DarkSlateGray" Margin="0,0,0,30">
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
                         <ui:SymbolIcon Symbol="Info28" FontSize="18" FontWeight="Bold" Margin="0,0,5,0"/>
                         <ui:TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15" FontWeight="Bold" Text="Welecome To MarineWeatherX !"></ui:TextBlock>
@@ -39,14 +39,79 @@
             </Grid>
 
             <!--Rank Summary-->
-            <Grid Grid.Row="1" Margin="0,0,0,0">
+            <Grid Margin="0,0,0,0">
                 <StackPanel>
-                    <TextBlock Text="● Rank Summary" FontSize="15" FontWeight="SemiBold" Margin="0,0,0,15"></TextBlock>
+                    <TextBlock Text="● Marin Weather Information" FontSize="15" FontWeight="SemiBold" Margin="0,0,0,15"></TextBlock>
                 </StackPanel>
             </Grid>
 
             <!-- Top3 Dasboard UI -->
-            <Grid Grid.Row="2" Margin="0,0,0,15">
+            <Grid Margin="0,0,0,15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Column="0" Grid.Row="0">
+                    <TextBlock Text="Hi"/>
+                </Grid>
+            </Grid>
+
+            <!-- 기존 Grid 자리에 ScrollViewer + ItemsControl으로 대체 -->
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,0,0,15">
+                <ItemsControl ItemsSource="{Binding ViewModel.RegionCards}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <ui:Card Margin="10" Width="250">
+                                <StackPanel>
+                                    <TextBlock Text="{Binding RegionName}" Foreground="White" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,10"/>
+
+                                    <ui:Card Margin="0,0,0,10">
+                                        <ui:TextBlock>
+                                            <Run Text="유의파고 " />
+                                            <Run Text="{Binding SignificantWaveHeight}" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
+                                        </ui:TextBlock>
+                                    </ui:Card>
+                                    <ui:Card Margin="0,0,0,10">
+                                        <ui:TextBlock>
+                                            <Run Text="풍속 " />
+                                            <Run Text="{Binding WindSpeed}" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
+                                        </ui:TextBlock>
+                                    </ui:Card>
+                                    <ui:Card>
+                                        <ui:TextBlock>
+                                            <Run Text="풍향 " />
+                                            <Run Text="{Binding WindDirection}" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
+                                        </ui:TextBlock>
+                                    </ui:Card>
+                                    <ui:Card>
+                                        <ui:TextBlock>
+                                            <Run Text="해수면온도 " />
+                                            <Run Text="{Binding SeaSurfaceTemp}" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
+                                        </ui:TextBlock>
+                                    </ui:Card>
+                                </StackPanel>
+                            </ui:Card>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+
+            <!--<Grid Margin="0,0,0,15">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
@@ -62,24 +127,30 @@
                     <Grid Grid.Row="0">
                         <ui:Card>
                             <StackPanel>
-                                <TextBlock Text="Top3 Total Population" Foreground="White" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,10"/>
+                                <TextBlock Text="울릉도" Foreground="White" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,10"/>
 
                                 <ui:Card Margin="0,0,0,10">
                                     <ui:TextBlock Margin="0,0,0,0">
-                                        <Run Text="신사동" />
-                                        <Run Text="31,250" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
+                                        <Run Text="유의파고" />
+                                        <Run Text="Dummy" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
                                     </ui:TextBlock>
                                 </ui:Card>
                                 <ui:Card Margin="0,0,0,10">
                                     <ui:TextBlock Margin="0,0,0,0">
-                                        <Run Text="청담동" />
-                                        <Run Text="29,280" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
+                                        <Run Text="풍속" />
+                                        <Run Text="Dummy" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
                                     </ui:TextBlock>
                                 </ui:Card>
                                 <ui:Card>
                                     <ui:TextBlock Margin="0,0,0,0">
-                                        <Run Text="논현동" />
-                                        <Run Text="28,775" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
+                                        <Run Text="풍향" />
+                                        <Run Text="Dummy" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
+                                    </ui:TextBlock>
+                                </ui:Card>
+                                <ui:Card>
+                                    <ui:TextBlock Margin="0,0,0,0">
+                                        <Run Text="해수면온도" />
+                                        <Run Text="Dummy" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
                                     </ui:TextBlock>
                                 </ui:Card>
                             </StackPanel>
@@ -95,23 +166,30 @@
                     <Grid Grid.Row="0">
                         <ui:Card>
                             <StackPanel>
-                                <TextBlock Text="Top3 Male Population" Foreground="White" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,10"/>
+                                <TextBlock Text="울릉도" Foreground="White" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,10"/>
+
                                 <ui:Card Margin="0,0,0,10">
                                     <ui:TextBlock Margin="0,0,0,0">
-                                        <Run Text="삼성동" />
-                                        <Run Text="10,235" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
+                                        <Run Text="유의파고" />
+                                        <Run Text="Dummy" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
                                     </ui:TextBlock>
                                 </ui:Card>
                                 <ui:Card Margin="0,0,0,10">
                                     <ui:TextBlock Margin="0,0,0,0">
-                                        <Run Text="개포동" />
-                                        <Run Text="9,580" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
+                                        <Run Text="풍속" />
+                                        <Run Text="Dummy" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
                                     </ui:TextBlock>
                                 </ui:Card>
                                 <ui:Card>
                                     <ui:TextBlock Margin="0,0,0,0">
-                                        <Run Text="도곡동" />
-                                        <Run Text="8,775" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
+                                        <Run Text="풍향" />
+                                        <Run Text="Dummy" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
+                                    </ui:TextBlock>
+                                </ui:Card>
+                                <ui:Card>
+                                    <ui:TextBlock Margin="0,0,0,0">
+                                        <Run Text="해수면온도" />
+                                        <Run Text="Dummy" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
                                     </ui:TextBlock>
                                 </ui:Card>
                             </StackPanel>
@@ -127,23 +205,30 @@
                     <Grid Grid.Row="0">
                         <ui:Card>
                             <StackPanel>
-                                <TextBlock Text="Top3 FeMale Population" Foreground="White" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,10"/>
+                                <TextBlock Text="울릉도" Foreground="White" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,10"/>
+
                                 <ui:Card Margin="0,0,0,10">
                                     <ui:TextBlock Margin="0,0,0,0">
-                                        <Run Text="논현동" />
-                                        <Run Text="12,655" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
+                                        <Run Text="유의파고" />
+                                        <Run Text="Dummy" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
                                     </ui:TextBlock>
                                 </ui:Card>
                                 <ui:Card Margin="0,0,0,10">
                                     <ui:TextBlock Margin="0,0,0,0">
-                                        <Run Text="청담동" />
-                                        <Run Text="10,450" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
+                                        <Run Text="풍속" />
+                                        <Run Text="Dummy" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
                                     </ui:TextBlock>
                                 </ui:Card>
                                 <ui:Card>
                                     <ui:TextBlock Margin="0,0,0,0">
-                                        <Run Text="삼성동" />
-                                        <Run Text="9,785" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
+                                        <Run Text="풍향" />
+                                        <Run Text="Dummy" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
+                                    </ui:TextBlock>
+                                </ui:Card>
+                                <ui:Card>
+                                    <ui:TextBlock Margin="0,0,0,0">
+                                        <Run Text="해수면온도" />
+                                        <Run Text="Dummy" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
                                     </ui:TextBlock>
                                 </ui:Card>
                             </StackPanel>
@@ -151,38 +236,45 @@
                     </Grid>
                 </Grid>
 
-                <Grid Grid.Column="3">
+                <Grid Grid.Column="4" Margin="0,0,15,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
 
-                    <ui:Card Margin="0,0,15,0">
-                        <StackPanel>
-                            <TextBlock Text="User Rating History" Foreground="White" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,15"/>
-                            <ui:Card Margin="0,0,0,10">
-                                <StackPanel Orientation="Horizontal">
-                                    <ui:TextBlock Text="Kelvin Lee" Margin="0,0,20,0"/>
-                                    <ui:RatingControl></ui:RatingControl>
-                                </StackPanel>
-                            </ui:Card>
+                    <Grid Grid.Row="0">
+                        <ui:Card>
+                            <StackPanel>
+                                <TextBlock Text="울릉도" Foreground="White" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,10"/>
 
-                            <ui:Card Margin="0,0,0,10">
-                                <StackPanel Orientation="Horizontal">
-                                    <ui:TextBlock Text="Alex Kim" Margin="0,0,20,0"/>
-                                    <ui:RatingControl></ui:RatingControl>
-                                </StackPanel>
-                            </ui:Card>
-
-                            <ui:Card Margin="0,0,0,10">
-                                <StackPanel Orientation="Horizontal">
-                                    <ui:TextBlock Text="Jhon Park" Margin="0,0,20,0"/>
-                                    <ui:RatingControl></ui:RatingControl>
-                                </StackPanel>
-                            </ui:Card>
-                        </StackPanel>
-                    </ui:Card>
+                                <ui:Card Margin="0,0,0,10">
+                                    <ui:TextBlock Margin="0,0,0,0">
+                                        <Run Text="유의파고" />
+                                        <Run Text="Dummy" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
+                                    </ui:TextBlock>
+                                </ui:Card>
+                                <ui:Card Margin="0,0,0,10">
+                                    <ui:TextBlock Margin="0,0,0,0">
+                                        <Run Text="풍속" />
+                                        <Run Text="Dummy" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
+                                    </ui:TextBlock>
+                                </ui:Card>
+                                <ui:Card>
+                                    <ui:TextBlock Margin="0,0,0,0">
+                                        <Run Text="풍향" />
+                                        <Run Text="Dummy" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
+                                    </ui:TextBlock>
+                                </ui:Card>
+                                <ui:Card>
+                                    <ui:TextBlock Margin="0,0,0,0">
+                                        <Run Text="해수면온도" />
+                                        <Run Text="Dummy" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
+                                    </ui:TextBlock>
+                                </ui:Card>
+                            </StackPanel>
+                        </ui:Card>
+                    </Grid>
                 </Grid>
-            </Grid>
+            </Grid>-->
 
             <!--Search Details-->
             <Grid Grid.Row="3" Margin="0,0,0,15">

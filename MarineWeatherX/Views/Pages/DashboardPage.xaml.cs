@@ -24,7 +24,7 @@ namespace MarineWeatherX.Views.Pages
             {
                 case "AdministrativeAgency":
                     this.loadingGrid.Visibility = Visibility.Collapsed;
-                    this.dashboardGrid.Visibility = Visibility.Visible;
+                    this.dashboardPanel.Visibility = Visibility.Visible;
                     break;
             }
         }

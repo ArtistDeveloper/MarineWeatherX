@@ -1,6 +1,7 @@
 ﻿using MarineWeatherX.Interfaces;
 using MarineWeatherX.Models;
 using Microsoft.EntityFrameworkCore.Storage;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 
 namespace MarineWeatherX.ViewModels.Pages
@@ -42,13 +43,13 @@ namespace MarineWeatherX.ViewModels.Pages
         private int? selectedNumberOfHouseholds;
 
         [ObservableProperty]
-        private int _counter = 0;
-
-        [ObservableProperty]
         private string? currentTime = string.Empty;
 
         [ObservableProperty]
         private List<string?>? datas = new List<string?>();
+
+        [ObservableProperty]
+        private ObservableCollection<RegionCard> regionCards = new ObservableCollection<RegionCard>();
 
         #endregion
 
@@ -57,7 +58,8 @@ namespace MarineWeatherX.ViewModels.Pages
         {
             this.database = database;
 
-            this.InitializeViewModelAsync();
+            InitializeViewModelAsync();
+            LoadSampleData();
         }
 
         #endregion
@@ -106,6 +108,51 @@ namespace MarineWeatherX.ViewModels.Pages
         public void OnNavigatedFrom()
         {
             //
+        }
+
+        /// <summary>
+        /// 샘플 데이터 사용
+        /// </summary>
+        public void LoadSampleData()
+        {
+            RegionCards.Clear();
+            RegionCards.Add(new RegionCard
+            {
+                RegionName = "울릉도",
+                SignificantWaveHeight = "2.5m",
+                WindSpeed = "8m/s",
+                WindDirection = "남동",
+                SeaSurfaceTemp = "18.4°C"
+            });
+
+            RegionCards.Add(new RegionCard
+            {
+                RegionName = "부산",
+                SignificantWaveHeight = "1.8m",
+                WindSpeed = "5m/s",
+                WindDirection = "북서",
+                SeaSurfaceTemp = "20.1°C"
+            });
+        }
+
+        /// <summary>
+        /// 동적으로 Card를 채우는 함수
+        /// </summary>
+        /// <returns></returns>
+        public void UpdateSelectedRegions(List<string> selectedRegions)
+        {
+            RegionCards.Clear();
+            foreach (var region in selectedRegions)
+            {
+                RegionCards.Add(new RegionCard
+                {
+                    RegionName = region,
+                    SignificantWaveHeight = "Dummy",
+                    WindSpeed = "Dummy",
+                    WindDirection = "Dummy",
+                    SeaSurfaceTemp = "Dummy"
+                });
+            }
         }
 
         private async Task InitializeViewModelAsync()
