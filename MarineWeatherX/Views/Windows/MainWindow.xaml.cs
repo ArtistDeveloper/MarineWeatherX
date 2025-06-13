@@ -3,6 +3,7 @@ using Wpf.Ui;
 using Wpf.Ui.Abstractions;
 using Wpf.Ui.Appearance;
 using Wpf.Ui.Controls;
+using System.Diagnostics;
 
 namespace MarineWeatherX.Views.Windows
 {
@@ -25,6 +26,9 @@ namespace MarineWeatherX.Views.Windows
             SetPageService(navigationViewPageProvider);
 
             navigationService.SetNavigationControl(RootNavigation);
+
+            // API Key 테스트
+            //Debug.WriteLine($"ApiKey = {App.Config["ApiKey"]}");
         }
 
         #region INavigationWindow methods

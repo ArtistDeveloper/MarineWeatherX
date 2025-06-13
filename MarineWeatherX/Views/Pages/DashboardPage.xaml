@@ -22,11 +22,11 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
+        <!-- Loading -->
         <Grid Grid.Column="0" x:Name="loadingGrid" Visibility="Collapsed">
             <controls:LoadingControl />
         </Grid>
-        <!-- Loading -->
-
+        
         <StackPanel Grid.Column="0" x:Name="dashboardPanel" Visibility="Visible">
             <!-- Welcome -->
             <Grid>
@@ -45,27 +45,7 @@
                 </StackPanel>
             </Grid>
 
-            <!-- Top3 Dasboard UI -->
-            <Grid Margin="0,0,0,15">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-
-                <Grid Grid.Column="0" Grid.Row="0">
-                    <TextBlock Text="Hi"/>
-                </Grid>
-            </Grid>
-
+            <!-- Weather UI -->
             <!-- 기존 Grid 자리에 ScrollViewer + ItemsControl으로 대체 -->
             <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,0,0,15">
                 <ItemsControl ItemsSource="{Binding ViewModel.RegionCards}">
@@ -110,171 +90,6 @@
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </ScrollViewer>
-
-            <!--<Grid Margin="0,0,0,15">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <Grid Grid.Column="0" Margin="0,0,15,0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
-                    </Grid.RowDefinitions>
-
-                    <Grid Grid.Row="0">
-                        <ui:Card>
-                            <StackPanel>
-                                <TextBlock Text="울릉도" Foreground="White" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,10"/>
-
-                                <ui:Card Margin="0,0,0,10">
-                                    <ui:TextBlock Margin="0,0,0,0">
-                                        <Run Text="유의파고" />
-                                        <Run Text="Dummy" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
-                                    </ui:TextBlock>
-                                </ui:Card>
-                                <ui:Card Margin="0,0,0,10">
-                                    <ui:TextBlock Margin="0,0,0,0">
-                                        <Run Text="풍속" />
-                                        <Run Text="Dummy" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
-                                    </ui:TextBlock>
-                                </ui:Card>
-                                <ui:Card>
-                                    <ui:TextBlock Margin="0,0,0,0">
-                                        <Run Text="풍향" />
-                                        <Run Text="Dummy" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
-                                    </ui:TextBlock>
-                                </ui:Card>
-                                <ui:Card>
-                                    <ui:TextBlock Margin="0,0,0,0">
-                                        <Run Text="해수면온도" />
-                                        <Run Text="Dummy" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
-                                    </ui:TextBlock>
-                                </ui:Card>
-                            </StackPanel>
-                        </ui:Card>
-                    </Grid>
-                </Grid>
-
-                <Grid Grid.Column="1" Margin="0,0,15,0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
-                    </Grid.RowDefinitions>
-
-                    <Grid Grid.Row="0">
-                        <ui:Card>
-                            <StackPanel>
-                                <TextBlock Text="울릉도" Foreground="White" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,10"/>
-
-                                <ui:Card Margin="0,0,0,10">
-                                    <ui:TextBlock Margin="0,0,0,0">
-                                        <Run Text="유의파고" />
-                                        <Run Text="Dummy" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
-                                    </ui:TextBlock>
-                                </ui:Card>
-                                <ui:Card Margin="0,0,0,10">
-                                    <ui:TextBlock Margin="0,0,0,0">
-                                        <Run Text="풍속" />
-                                        <Run Text="Dummy" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
-                                    </ui:TextBlock>
-                                </ui:Card>
-                                <ui:Card>
-                                    <ui:TextBlock Margin="0,0,0,0">
-                                        <Run Text="풍향" />
-                                        <Run Text="Dummy" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
-                                    </ui:TextBlock>
-                                </ui:Card>
-                                <ui:Card>
-                                    <ui:TextBlock Margin="0,0,0,0">
-                                        <Run Text="해수면온도" />
-                                        <Run Text="Dummy" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
-                                    </ui:TextBlock>
-                                </ui:Card>
-                            </StackPanel>
-                        </ui:Card>
-                    </Grid>
-                </Grid>
-
-                <Grid Grid.Column="2" Margin="0,0,15,0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
-                    </Grid.RowDefinitions>
-
-                    <Grid Grid.Row="0">
-                        <ui:Card>
-                            <StackPanel>
-                                <TextBlock Text="울릉도" Foreground="White" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,10"/>
-
-                                <ui:Card Margin="0,0,0,10">
-                                    <ui:TextBlock Margin="0,0,0,0">
-                                        <Run Text="유의파고" />
-                                        <Run Text="Dummy" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
-                                    </ui:TextBlock>
-                                </ui:Card>
-                                <ui:Card Margin="0,0,0,10">
-                                    <ui:TextBlock Margin="0,0,0,0">
-                                        <Run Text="풍속" />
-                                        <Run Text="Dummy" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
-                                    </ui:TextBlock>
-                                </ui:Card>
-                                <ui:Card>
-                                    <ui:TextBlock Margin="0,0,0,0">
-                                        <Run Text="풍향" />
-                                        <Run Text="Dummy" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
-                                    </ui:TextBlock>
-                                </ui:Card>
-                                <ui:Card>
-                                    <ui:TextBlock Margin="0,0,0,0">
-                                        <Run Text="해수면온도" />
-                                        <Run Text="Dummy" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
-                                    </ui:TextBlock>
-                                </ui:Card>
-                            </StackPanel>
-                        </ui:Card>
-                    </Grid>
-                </Grid>
-
-                <Grid Grid.Column="4" Margin="0,0,15,0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
-                    </Grid.RowDefinitions>
-
-                    <Grid Grid.Row="0">
-                        <ui:Card>
-                            <StackPanel>
-                                <TextBlock Text="울릉도" Foreground="White" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,10"/>
-
-                                <ui:Card Margin="0,0,0,10">
-                                    <ui:TextBlock Margin="0,0,0,0">
-                                        <Run Text="유의파고" />
-                                        <Run Text="Dummy" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
-                                    </ui:TextBlock>
-                                </ui:Card>
-                                <ui:Card Margin="0,0,0,10">
-                                    <ui:TextBlock Margin="0,0,0,0">
-                                        <Run Text="풍속" />
-                                        <Run Text="Dummy" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
-                                    </ui:TextBlock>
-                                </ui:Card>
-                                <ui:Card>
-                                    <ui:TextBlock Margin="0,0,0,0">
-                                        <Run Text="풍향" />
-                                        <Run Text="Dummy" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
-                                    </ui:TextBlock>
-                                </ui:Card>
-                                <ui:Card>
-                                    <ui:TextBlock Margin="0,0,0,0">
-                                        <Run Text="해수면온도" />
-                                        <Run Text="Dummy" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
-                                    </ui:TextBlock>
-                                </ui:Card>
-                            </StackPanel>
-                        </ui:Card>
-                    </Grid>
-                </Grid>
-            </Grid>-->
 
             <!--Search Details-->
             <Grid Grid.Row="3" Margin="0,0,0,15">
@@ -400,7 +215,7 @@
                 </StackPanel>
             </Grid>
 
-            <Grid Grid.Row="6" Margin="0,0,0,0">
+            <Grid Grid.Row="6" Margin="0,0,0,15">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>

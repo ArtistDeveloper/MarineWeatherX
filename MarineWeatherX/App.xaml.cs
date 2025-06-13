@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Configuration;
+using System.Windows;
 using System.IO;
 using System.Reflection;
 using System.Windows.Threading;
@@ -14,6 +16,8 @@ using Wpf.Ui.DependencyInjection;
 using MarineWeatherX.Interfaces;
 using MarineWeatherX.Models;
 
+
+
 namespace MarineWeatherX
 {
     /// <summary>
@@ -21,6 +25,22 @@ namespace MarineWeatherX
     /// </summary>
     public partial class App
     {
+
+        public static IConfiguration Config { get; private set; } = null!;
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            // 1) 가장 먼저 비밀/설정 로드
+            Config = new ConfigurationBuilder()
+                .SetBasePath(AppContext.BaseDirectory)
+                .AddJsonFile("appsettings.json", optional: true)
+                .AddUserSecrets<App>()
+                .AddEnvironmentVariables()
+                .Build();
+
+            // 2) 그 다음에 WPF 기본 로직 실행
+            base.OnStartup(e);
+        }
+
         // The.NET Generic Host provides dependency injection, configuration, logging, and other services.
         // https://docs.microsoft.com/dotnet/core/extensions/generic-host
         // https://docs.microsoft.com/dotnet/core/extensions/dependency-injection

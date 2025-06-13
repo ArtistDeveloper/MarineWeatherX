@@ -133,6 +133,42 @@ namespace MarineWeatherX.ViewModels.Pages
                 WindDirection = "북서",
                 SeaSurfaceTemp = "20.1°C"
             });
+
+            RegionCards.Add(new RegionCard
+            {
+                RegionName = "부산",
+                SignificantWaveHeight = "1.8m",
+                WindSpeed = "5m/s",
+                WindDirection = "북서",
+                SeaSurfaceTemp = "20.1°C"
+            });
+
+            RegionCards.Add(new RegionCard
+            {
+                RegionName = "부산",
+                SignificantWaveHeight = "1.8m",
+                WindSpeed = "5m/s",
+                WindDirection = "북서",
+                SeaSurfaceTemp = "20.1°C"
+            });
+
+            RegionCards.Add(new RegionCard
+            {
+                RegionName = "부산",
+                SignificantWaveHeight = "1.8m",
+                WindSpeed = "5m/s",
+                WindDirection = "북서",
+                SeaSurfaceTemp = "20.1°C"
+            });
+
+            RegionCards.Add(new RegionCard
+            {
+                RegionName = "부산",
+                SignificantWaveHeight = "1.8m",
+                WindSpeed = "5m/s",
+                WindDirection = "북서",
+                SeaSurfaceTemp = "20.1°C"
+            });
         }
 
         /// <summary>
