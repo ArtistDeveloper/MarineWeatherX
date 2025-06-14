@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 using MarineWeatherX.Models;
 
 namespace MarineWeatherX.Services
@@ -51,6 +52,7 @@ namespace MarineWeatherX.Services
                 if (line.StartsWith("#") || string.IsNullOrWhiteSpace(line)) continue;
                 var parts = line.Split(',');
                 if (parts.Length < 14) continue;
+                if (HasMissingRequiredFields(parts)) continue;
 
                 try
                 {
@@ -69,17 +71,40 @@ namespace MarineWeatherX.Services
                         PA = ParseNullableDouble(parts[ColumnIndex.PA]),
                         HM = ParseNullableDouble(parts[ColumnIndex.HM])
                     };
-                    // 필터링: regionNames에 포함된 지역만 추가
-                    if (regionNames == null || regionNames.Count == 0 || regionNames.Contains(data.STN_KO))
+
+                    if (regionNames.Contains(data.STN_KO))
                         dataList.Add(data);
                 }
                 catch
                 {
+                    // 파싱 실패 시 무시
                     continue;
                 }
             }
             return dataList;
         }
+
+        private bool HasMissingRequiredFields(string[] parts)
+        {
+            // 문자열 자체가 비어 있거나
+            if (string.IsNullOrWhiteSpace(parts[ColumnIndex.TM]) ||
+                string.IsNullOrWhiteSpace(parts[ColumnIndex.STN_KO]) ||
+                string.IsNullOrWhiteSpace(parts[ColumnIndex.WH]) ||
+                string.IsNullOrWhiteSpace(parts[ColumnIndex.WS]))
+                return true;
+
+            // 비어 있진 않지만 실제 값이 -99.0인 경우
+            if (!TryValidDouble(parts[ColumnIndex.WH]) || !TryValidDouble(parts[ColumnIndex.WS]))
+                return true;
+
+            return false;
+        }
+
+        private bool TryValidDouble(string s)
+        {
+            return double.TryParse(s.Trim(), out double val) && val != -99.0;
+        }
+
 
         private double? ParseNullableDouble(string s)
         {

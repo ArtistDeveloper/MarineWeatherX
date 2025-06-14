@@ -129,6 +129,8 @@ namespace MarineWeatherX.ViewModels.Pages
                     WindDirection = regionData.WD,
                     SeaSurfaceTemp = regionData.TA,
                 });
+
+                //Debug.WriteLine($"RegionName: {regionData.STN_KO}, RegionID: {regionData.STN_ID}, WaveHeight: {regionData.WH}");
             }
         }
 
