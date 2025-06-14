@@ -4,14 +4,13 @@ using MarineWeatherX.Services;
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Windows.Media;
 
 namespace MarineWeatherX.ViewModels.Pages
 {
     public partial class DashboardViewModel : ObservableObject
     {
         #region FIELDS
-
-        private readonly IDatabase<GangnamguPopulation> database;
 
         private bool isInitialized = false;
 
@@ -20,9 +19,6 @@ namespace MarineWeatherX.ViewModels.Pages
         #region PROPERTIES
         [ObservableProperty]
         private List<SeaWeatherData>? regionDatas;
-
-        [ObservableProperty]
-        private IEnumerable<GangnamguPopulation?>? gangnamguPopulations;
 
         [ObservableProperty]
         private IEnumerable<string?>? administrativeAgency;
@@ -57,13 +53,8 @@ namespace MarineWeatherX.ViewModels.Pages
         #endregion
 
         #region CONSTRUCTOR
-        public DashboardViewModel(IDatabase<GangnamguPopulation> database)
+        public DashboardViewModel()
         {
-            this.database = database;
-
-            InitializeViewModelAsync();
-
-            // API 호출 테스트
             LoadSampleData();
         }
 
@@ -85,19 +76,6 @@ namespace MarineWeatherX.ViewModels.Pages
                 MessageBox.Show($"Error opening web page: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
-        [RelayCommand]
-        private void OnSearchDeatil()
-        {
-            var data = this.GangnamguPopulations?.Where(c => c.AdministrativeAgency == this.SelectedAdministrativeAgency).FirstOrDefault();
-
-            this.SelectedTotalPopulation = data.TotalPopulation;
-            this.SelectedMalePopulation = data.MalePopulation;
-            this.SelectedFeMalePopulation = data.FemalePopulation;
-            this.SelectedSexRatio = data.SexRatio;
-            this.SelectedNumberOfHouseholds = data.NumberOfHouseholds;
-        }
-
         #endregion
 
         #region METHODS
@@ -118,19 +96,23 @@ namespace MarineWeatherX.ViewModels.Pages
         {
             RegionCards.Clear();
 
-            foreach (var regionData in regionDatas)
+
+            foreach (var r in regionDatas)
             {
+                var status = EvaluateStatus(r.WS, r.WH);
+                var statusBrush = GetStatusBrush(status);
+
                 RegionCards.Add(new RegionCard
                 {
-                    RegionName = regionData.STN_KO,
-                    RegionID = regionData.STN_ID,
-                    WaveHeight = regionData.WH,
-                    WindSpeed = regionData.WS,
-                    WindDirection = regionData.WD,
-                    SeaSurfaceTemp = regionData.TA,
+                    RegionName = r.STN_KO,
+                    RegionID = r.STN_ID,
+                    WaveHeight = r.WH,
+                    WindSpeed = r.WS,
+                    WindDirection = r.WD,
+                    SeaSurfaceTemp = r.TA,
+                    Status = status,
+                    StatusBrush = statusBrush
                 });
-
-                //Debug.WriteLine($"RegionName: {regionData.STN_KO}, RegionID: {regionData.STN_ID}, WaveHeight: {regionData.WH}");
             }
         }
 
@@ -138,29 +120,30 @@ namespace MarineWeatherX.ViewModels.Pages
         {
             if (!isInitialized)
             {
-                InitializeViewModelAsync();
+                //InitializeViewModelAsync();
             }
         }
 
         public void OnNavigatedFrom()
         {
-            //
+            
         }
 
-        private async Task InitializeViewModelAsync()
+        private static RegionStatus EvaluateStatus(double? windSpeed, double? waveHeight)
         {
-            // 비동기로 데이터를 가져오기
-            this.GangnamguPopulations = await Task.Run(() => this.database?.Get());
-
-            // 가져온 데이터를 가지고 필요한 작업 수행
-            if (this.GangnamguPopulations != null)
-            {
-                this.AdministrativeAgency = this.GangnamguPopulations.Select(c => c.AdministrativeAgency).ToList();
-            }
-
-            isInitialized = true;
+            if (windSpeed >= 21 || waveHeight >= 5) return RegionStatus.Danger;
+            if ((windSpeed is >= 14 and < 21) || (waveHeight is >= 3 and < 5))
+                return RegionStatus.Caution;
+            return RegionStatus.Safe;
         }
 
+        private static SolidColorBrush GetStatusBrush(RegionStatus status) => status switch
+        {
+            RegionStatus.Danger => new(Color.FromRgb(220, 20, 60)),
+            RegionStatus.Caution => new(Color.FromRgb(255, 140, 0)),
+            RegionStatus.Safe => new(Color.FromRgb(78, 159, 117)),
+            _ => Brushes.Transparent
+        };
         #endregion
     }
 }
