@@ -46,50 +46,52 @@
             </Grid>
 
             <!-- Weather UI -->
-            <!-- 기존 Grid 자리에 ScrollViewer + ItemsControl으로 대체 -->
-            <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,0,0,15">
-                <ItemsControl ItemsSource="{Binding ViewModel.RegionCards}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel Orientation="Horizontal" />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <ui:Card Margin="10" Width="250">
-                                <StackPanel>
-                                    <TextBlock Text="{Binding RegionName}" Foreground="White" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,10"/>
-
-                                    <ui:Card Margin="0,0,0,10">
-                                        <ui:TextBlock>
-                                            <Run Text="유의파고 " />
-                                            <Run Text="{Binding SignificantWaveHeight}" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
-                                        </ui:TextBlock>
-                                    </ui:Card>
-                                    <ui:Card Margin="0,0,0,10">
-                                        <ui:TextBlock>
-                                            <Run Text="풍속 " />
-                                            <Run Text="{Binding WindSpeed}" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
-                                        </ui:TextBlock>
-                                    </ui:Card>
-                                    <ui:Card>
-                                        <ui:TextBlock>
-                                            <Run Text="풍향 " />
-                                            <Run Text="{Binding WindDirection}" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
-                                        </ui:TextBlock>
-                                    </ui:Card>
-                                    <ui:Card>
-                                        <ui:TextBlock>
-                                            <Run Text="해수면온도 " />
-                                            <Run Text="{Binding SeaSurfaceTemp}" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
-                                        </ui:TextBlock>
-                                    </ui:Card>
+            <!-- ItemsControl을 통한 동적 카드 렌더링 -->
+            <ItemsControl ItemsSource="{Binding ViewModel.RegionCards}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <ui:Card Margin="10" Width="250">
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                    <TextBlock Text="{Binding RegionName}" Foreground="White" FontSize="14" FontWeight="SemiBold" Margin="0,0,10,0"/>
+                                    <TextBlock Text="{Binding RegionID}" Foreground="LightGray" FontSize="14" FontWeight="Normal"/>
                                 </StackPanel>
-                            </ui:Card>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </ScrollViewer>
+                                <!--<TextBlock Text="{Binding RegionName}" Foreground="White" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,10"/>-->
+
+                                <ui:Card Margin="0,0,0,10">
+                                    <ui:TextBlock>
+                                        <Run Text="유의파고 " />
+                                        <Run Text="{Binding WaveHeight}" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
+                                    </ui:TextBlock>
+                                </ui:Card>
+                                <ui:Card Margin="0,0,0,10">
+                                    <ui:TextBlock>
+                                        <Run Text="풍속 " />
+                                        <Run Text="{Binding WindSpeed}" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
+                                    </ui:TextBlock>
+                                </ui:Card>
+                                <ui:Card>
+                                    <ui:TextBlock>
+                                        <Run Text="풍향 " />
+                                        <Run Text="{Binding WindDirection}" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
+                                    </ui:TextBlock>
+                                </ui:Card>
+                                <ui:Card>
+                                    <ui:TextBlock>
+                                        <Run Text="해수면온도 " />
+                                        <Run Text="{Binding SeaSurfaceTemp}" FontSize="20" FontWeight="Bold" Foreground="IndianRed"/>
+                                    </ui:TextBlock>
+                                </ui:Card>
+                            </StackPanel>
+                        </ui:Card>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
 
             <!--Search Details-->
             <Grid Grid.Row="3" Margin="0,0,0,15">
