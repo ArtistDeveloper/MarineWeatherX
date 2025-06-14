@@ -6,7 +6,7 @@ namespace MarineWeatherX.ViewModels.Windows
     public partial class MainWindowViewModel : ObservableObject
     {
         [ObservableProperty]
-        private string _applicationTitle = "WPF UI - MarineWeatherX";
+        private string _applicationTitle = "MarineWeatherX";
 
         [ObservableProperty]
         private ObservableCollection<object> _menuItems = new()
